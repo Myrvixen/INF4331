@@ -1,0 +1,11 @@
+Here I chose to use solve the same integral as in 4.2 (as will I for all following implementations as well),
+f(x) = x^2, from 0 to 1, and N = 150000000.
+Running integrator.py (pure python) gives the following timing: 28.481 s.
+Running numpy_integrator.py (numpy) gives the following timing: 1.629 s.
+
+This roughly gives a speed-up of 20x. One might expect this number to be even higher (numpy normally performs
+> 50x better than pure python), but this "low" number might be due to the numpy integrator creating arrays,
+while the pure python integrator solves the integral efficiently without them. I could of course create the
+arrays outside the integrator function, but I wanted to stay true to the exercise and have the different methods
+take the same arguments (no arrays). This will also make life easier later when we're to compare all methods
+for the same arguments.

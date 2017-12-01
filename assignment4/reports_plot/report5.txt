@@ -1,0 +1,15 @@
+I used the same function as before, with the same arguments (f(x) = x^2, a = 0, b = 1, N = 150000000),
+but now comparing the earlier results with cython.
+
+Running integrator.py (pure python) gives the following timing: 28.481 s.
+Running numpy_integrator.py (numpy) gives the following timing: 1.629 s.
+Running numba_integrator.py (numba) gives the following timing: 0.281 s.
+Running cython_integrator.pt (cython) gives the following timing: 1.465 s.
+
+The timing for the cython implementation is likely slower than it "should be", at least compared to the
+performance of numba. This is more than likely due to me not being able to find a good "cythonized" way to pass
+the function f(x) into the cython integrator. In the integrator it is now just called as a normal python function,
+which obviously slows it down a lot. I tried hardcoding the function also, but this didn't give any significant
+speed-up, weirdly enough. I decided then to keep having the integrator take f as an argument (python function),
+as it makes the comparison later much easier. We still see from the results that it's slightly faster than the
+numpy implementation, so it's not all that bad. 

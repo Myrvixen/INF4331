@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+body{
+	
+	background-image: url("/static/test.png");
+	background-size: 73% 300%;
+	background-position: center top;
+}
+
+.redtext {
+	color: #b6000d;
+}
+
+.div1 {
+	float: left;
+}
+
+.div2 {
+	float: right;
+	text-align: right;
+}
+
+#locator1 {
+	position: absolute; visibility: visible; left: 175px; z-index: 200;
+}
+
+#locator2 {
+	position: absolute; visibility: visible; right: 185px; z-index: 200;
+}
+
+}
+</style>
+
+<font size="7"><b>Not everyone is on board with the idea that GLOBAL WARMING is really happening. Some might even say it's... FAKE NEWS?!?!</b> </font><br><br>
+
+
+<br><br>
+
+<div>
+	<div class="div1"><font size="5"><b>Below this text you can generate plots for the average <br> temperatures in the US in any period from 1816-2012, <br> by entering the start and end of your desired period.</b><font>
+	<br><br>
+
+		<div id="locator1">
+		<form action="/plots/temp_plot" method='POST'>
+		Start Year:<br>
+		<input type="text" name="startyear"><br>
+		End year:<br>
+		<input type="text" name="endyear"><br>
+		<input type="submit" value="Submit">
+		</form>
+		</div>
+
+	</div>
+	<div class="div2"><font size="5"><b>Below this text you can generate plots for the global <br>emmision of CO2 in any period from 1751 to 2012, <br> by entering the start and end of your desired period.</b><font>
+	<br><br>
+
+		<div id="locator2">
+		<form>
+		Start Year:<br>
+		<input type="text" name="startyear"><br>
+		End year:<br>
+		<input type="text" name="endyear"><br>
+		<input type="submit" value="Submit">
+		</form>
+		</div>
+
+	</div>
+</div>
+<br><br>

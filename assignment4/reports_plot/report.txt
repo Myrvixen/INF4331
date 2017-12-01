@@ -1,0 +1,28 @@
+I chose to use my implementation of integration with numba, as this was the method that computed the
+fastest for me. With a = 10^(-20), b = 10^7 and N = 3*10^8 I got these results:
+
+Integral1
+Integral:  0.5000000000000318
+Computation time: 30.984
+
+Integral2
+Integral:  0.49999999999997363
+Computation time: 39.754
+
+Integral3
+Integral:  0.5000000000000014
+Computation time: 58.198
+
+Integral4
+Integral:  0.499999999999999
+Computation time: 68.955
+
+Integral5
+Integral:  0.49999999999264777
+Computation time: 78.415
+
+Integral6
+Integral:  0.4999999999996544
+Computation time: 40.395
+
+The results for integrals 3 and 4 are particularly good (the true answer is 0.5 exactly).

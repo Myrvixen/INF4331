@@ -1,0 +1,18 @@
+Results from integrator_comparison.py:
+
+Required N for integrate method: 129000                || time: 7.966 s
+Required N for integrate_midpoint method: 91000        || time: 3.848 s
+Required N for integrate_numpy method: 129000          || time: 0.358 s
+Required N for integrate_numpy_midpoint method: 91000  || time: 0.105 s
+Required N for integrate_numba method: 129000          || time: 7.526 s
+Required N for integrate_numba_midpoint method: 91000  || time: 5.432 s
+Required N for integrate_cython method: 129000         || time: 0.206 s
+Required N for integrate_cython_midpoint method: 91000 || time: 0.112 s
+
+I have here upped N with 1000 for each iteration, and stopped the iterations when the error got lower than 10^-10.
+Wee see that the "normal" integrations all give the same result, and all the midpoints integrations also give the
+same result. I tried lowering the N-step to 100 (which took a lot more time computing), but the results for the two
+groups of methods still stayed the same. There might be differences of a few N in between some of the methods, but
+this would take A LOT more time to find (especially for the pure python methods). 'Ain't nobody got time for that!'
+
+The main point here is that the midpoint method is a lot more accurate, with the error converging to 0 a lot faster. 

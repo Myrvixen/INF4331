@@ -1,0 +1,345 @@
+\documentclass[a4paper]{article}
+
+% Import some useful packages
+\usepackage[margin=0.5in]{geometry} % narrow margins
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\definecolor{LightGray}{gray}{0.95}
+
+\title{Peer-review of assignment 4 for \textit{INF3331-tommymy}}
+\author{Reviewer 1, henrikvgrikvg, {henrikvg@student.matnat.uio.no} \\
+ 		Reviewer 2, eebirkel, {eebirkel@ifi.uio.no} }
+\begin{document}
+\maketitle
+
+\section{Introduction}
+\subsection{Goal}
+The review should provide feedback on the solution to the student. The main goal is to \emph{give constructive feedback and advice} on how to improve the solution. You, the peer-review team, can decide how you organize the peer-review work between you. 
+
+\subsection{Guidelines}\label{sec:general_review}
+For each (coding) exercise, one should review the following points:
+
+\begin{itemize}
+  \item Is the code \textbf{working as expected}? For non-internal functions (in particular for scripts that are run from the command-line), does the program handle invalid inputs sensibly?
+  \item Is the code \textbf{well documented}? Are there docstrings and are the useful?
+  \item Is the code written in \textbf{Pythonic way} \footnote{https://www.python.org/dev/peps/pep-0020/}? Is the code easy to read? Are the variable/class/function names sensible? Do you find overuse of classes or not sufficient use of functions or classes? Are there parts of the program that are hard to understand? 
+  \item Can you find \textbf{unnecessarily complicated parts} of the program? If so, suggest an improved implementation.
+  \item List the programming parts that are not answered.
+\end{itemize}
+Use (shortened) code snippets where appropriate to show how to improve the solution. 
+
+\subsection{Points}
+The review is completed by pushing the review Latex source file (.tex files) and the PDF files to each of the reviewed repositories. The name of the files should be \emph{feedback.tex} and \emph{feedback.pdf} in the students assignemnt4 directory.
+
+You will get up to 10 points for delivering the peer-reviews. Each of you should contribute to the review roughly equivalently - your team will get the same number of points\footnote{In case a team-member does not contribute, please email \href{mailto:simon@simula.no}{simon@simula.no}}. 
+
+
+
+\section{Review \emph{- to be filled out}}\label{sec:review}
+
+Specify the system (Python version, operating system, ...) that was used for the review.
+
+Python 3.5.2 via cmd on Windows 10.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{General feedback}
+Use this section to give general feedback about the solution such as advice for improved programming or documentation style.
+\newline
+I like some of your logic. Which is very different from mine.
+Some of the lines took me a second to understand what you were thinking when you wrote it, but once I got it, it made total sense.
+
+\subsubsection*{Imports}
+You have used some different types of imports in the different scripts.
+I can find both \emph{import *} and \emph{import numpy as np}, which is not very consistent.
+\newline
+\mint{python}|import *|
+Importing all in Python is generally frowned upon.
+It clutters the namespace, and the function/class/thing you are actually importing and using later in your code; we would not know from which package that function is imported from.
+
+let's say in each of your integrate, numpy\_integrate and numba\_integrate modules you have called your function just "integrate", if you did import * on all, the pointer to integrate would be overwritten for each import.
+\subsubsection*{Complicated/Cryptic}
+I don't find/see anything I would classify as overly complicated, but there are some cryptic and some shortened variable names here and there that could have just had the entire word as variable name or something descriptive. i.e. \emph{l\_f\_a}
+
+\subsubsection*{Documentation (Docstrings/Comments)}
+All functions should have a docstring on the line just below def.
+Example:
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+def integrate(f,a,b,N):
+    """ integrates function f from a to b with N Ns, and returns the result """
+    \# code here
+    \# ...
+    \# return result
+\end{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.1}
+Add a review based on section \ref{sec:general_review}. Do the tests have a meaningful name?
+			
+            The tests have meaningful names.
+            I'd like to see tests for numba and cython as well.
+            I'd also like to see tests with N being either 0 or a negative value.
+            
+\begin{itemize}
+  \item The code is working as expected. Maybe add a list of Ns so we can easily test different N values, including N=0 and N equal to a negative number.
+  
+  \item I do not miss any docs/comments in the tests. The code documents itself.
+
+\item Some lines that are not super pythonic; split the variables to one per line, and write out tolerance instead of shortening it to tol. 
+	\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+	a = 0;  b = 1
+	N1 = 10 ; N2 = 1000
+	tol = 1e-10
+    \end{minted}
+    I would probably have moved N1 and N2 into a list of Ns=[], and also tested for N zero and N negative.
+That would include tests for some errors we might expect to meet.
+    \begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+	a = 0
+	b = 1
+	Ns = [10, 1000]
+	tolerance = 1e-10
+    \end{minted}
+    
+      \begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+import sys
+sys.path.append("..")  # Fetches the directory the current subdirectory is a part of
+from integrator import integrate
+from numpy_integrator import integrate_numpy
+\end{minted}
+Imports should be at the top of the file, and "sys.path.append("...") should be moved down.
+  
+    
+    
+  \item No overly complicated parts.
+
+\item I believe you are missing test of quadratic function
+i.e:
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+f = lambda x:x^2
+\end{minted}
+ref assign 4.3
+
+\end{itemize}
+  
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.2} \label{sec:assignment5.2}
+Add a review based on section \ref{sec:general_review}.
+
+\begin{itemize}
+
+  \item The code woorks as expected for positive Ns. Add check on N for zero and negative numbers?
+  \item I interpreted the assignment to calculate the left rectangles (ref the integration picture in the assignment at 4.0) also as written l [xi\-1, xi]
+  \newline
+  Example:
+  \begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+for i in range(N):
+    Sum += dx*f(a + i*dx)  
+  \end{minted}
+  \begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+for i in range(1, N+1):
+    Sum += dx*f(a + i*dx)
+	\end{minted}
+
+  
+ 
+  \item There are no docstrings
+  	\newline
+  	Example:
+  	\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+    def integrate(f, a, b, N):
+	""" integrates function f from a to b with N Ns. """
+	# code...
+	return sum
+    \end{minted}
+
+  
+  \item It's all easy to read and not unnessesseray complicated.
+  \item Variables in Python should generally be lower-case. ref PEP8\footnote{https://gist.github.com/sloria/7001839\#style}
+  So "Sum" should be "sum".
+  \item \textbf{"from numpy import *"}
+  \begin{itemize}
+  \item "explicit is better than implicit"
+  \item "readability counts"
+  \item from your code you use \mint{python}|error = zeros(len(N))|
+so top of the file should be \mint{python}|from numpy import zeroes| or \mint{python}|import numpy as np| and later have used \mint{python}|error = np.zeros(len(N))|
+so when someone else are looking at your code, (or you come back to it in 3 months)
+we will instantly know that "zeroes" is a function imported from numpy, and not from any of the other libraries.
+\mint{python}|import *| also clutters the namespace.
+  \end{itemize}
+
+\end{itemize}
+
+At the plot error:
+Personally i might have made error = [] instead of error = np.zeroes()
+I feel like error=[] is more readable, but that might just be a personal preference. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.3}
+Add a review based on section \ref{sec:general_review}. In addition, review the following assignment specific items: 
+\begin{itemize}
+  \item Is numpy being used effectively (e.i. vectorization where possible)?
+\end{itemize}
+
+I don't have anything to say about the logic, it looks OK, it's different from mine.
+\newline It doesn't \textit{feel} pythonic, but I can't put my finger on it, so maybe it is?
+    
+dx should still be "dx = (b-a)/N"?
+That way the dx variable is self-explanatory?
+Now I feel like I would like a comment in there.
+Maybe just "\# same as (b-a)/N" and maybe a reason to change it?
+\newline
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+from numpy import *
+def integrate_numpy_midpoint(f, a, b, N):
+	""" docstring """
+	x = linspace(a, b, N+1)
+	f_arr = zeros(N+1)
+	dx = x[1]-x[0]
+	f_arr[:] = f(x[:] +0.5*dx)
+	Sum = sum(dx*f_arr[:-1])
+	return Sum
+\end{minted}
+    
+You make two arrays here?
+x and f\_arr, would it not be better to make x and do
+x[:] = f(x[:]) ? We also see here why you have chosen to name you variable sum for Sum. I would have done this:
+
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+import numpy as np
+def integrate_numpy_midpoint(f, a, b, N):
+	""" docstring """
+	x = linspace(a, b, N+1)
+	dx = (b-a)/N
+	x[:] = f(x[:] + (dx/2))
+	sum = np.sum(dx*x[:-1])
+	return sum
+\end{minted}
+
+
+My understanding of 4.3 refers to 4.2 and 4.1 and you should have added 
+a test test\_integrate\_quadratic\_function (x = x**2) in addition to adding 
+numpy\_integrate to the tests.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.4}
+Add a review based on section \ref{sec:general_review}.
+
+
+\begin{itemize}
+\item The code works as expected, but there's no tests for N=0 or N=neg value.
+
+\item Yes, we have a comment! :), and it's useful. Still missing docstrings.
+
+\item There's a function named "call", maybe call it at least "call\_integrate" or something along those lines?
+ 
+\item  Missing answer on "Can you think of any other advantages to using Numba
+instead of numpy?" ?
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.5}
+Add a review based on section \ref{sec:general_review}. If you are reviewing a INF3331 student, you can skip this review.
+
+
+
+I did not do the cython version myself.
+But looking at it it looks like a nice cython implementation of your numpy solution.
+
+It would be the same comments as for the numpy solution.
+
+I like your reports :)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.6}
+Add a review based on section \ref{sec:general_review}.
+
+\begin{itemize}
+\item Works as expected.No check for invalid Ns.
+\item Still no docstrings.
+  
+\item comments:
+\begin{itemize}
+\item 
+\mint{python}|while error > tolerance| smart solution, i checked for that inside the loop.
+but you have set error to a random number, i would have done:
+\mint{python}|
+tolerance = 1e-10
+for (..):
+	error = tolerance + 1 |(or something)
+...To specify that error should start with being bigger than \emph{tolerance}, 
+at first glance i wonder why it's set to \emph{100000}.
+Maybe add a comment to show why.
+
+
+In the comparison file you have 
+\mint{python}|error = abs(integral - 2)|
+where 2 is the "real answer" of the function, I would move \emph{2} into a variable of it's own, so reading the operation is really clear on what it does.
+
+
+Midpoint implementation:
+Even though we all know that * comes before +
+i might have added a parenthesis around +(0.5*dx), for readability maybe 
++(dx/2), even though it is the same matematical operation, it's easier to understand? Maybe?
+\end{itemize}
+  
+\end{itemize}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Assignment 4.7}
+Add a review based on section \ref{sec:general_review}.
+
+\begin{itemize}
+\item Working as expected:
+\begin{itemize}
+\item Can't pip install with the cython, something about path to visual studio.
+\item I \textit{think} the setup.py should have installed requirements? such as matplotlib (which in turn installs numpy.)
+\item Everything else looks good.
+\end{itemize} 
+
+\item Still no docstrings, for a package; maybe we should have added a README with a short description of requirements, what it does and how to use it?
+
+  \item Most of your code is compact, consise and self-explanatory, but I still miss some comments here and there.
+  
+\end{itemize}
+
+\subsection*{Assignment 4.8}
+Add a review based on section \ref{sec:general_review}.
+\newline\newline
+Generating the functions is a neat little trick, 
+but I think I would still write them out for readability.
+at least a comment on the last one that is not part of the generated.
+
+variable names \emph{s}, \emph{l\_f\_e} should be descriptive.
+I would also use something else than "e" in the for loop?
+Maybe:
+\begin{minted}[bgcolor=LightGray, linenos, fontsize=\footnotesize]{python}
+for func in func_list:
+	f = eval("lambda x: %s" %func)
+\end{minted}
+    
+we are already used to using f=()
+for the name of the function variable from the rest of the assignments...
+
+\subsubsection*{Summa summarum}
+All over, missing some docstrings, some tests, and comments, but good job and logic seems fine to me.
+
+
+\bibliographystyle{plain}
+\bibliography{literature}
+
+\end{document}

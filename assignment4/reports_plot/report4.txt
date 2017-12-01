@@ -1,0 +1,18 @@
+I used the same function as before, with the same arguments (f(x) = x^2, a = 0, b = 1, N = 150000000),
+but now comparing the earlier results with numba.
+
+Running integrator.py (pure python) gives the following timing: 28.481 s.
+Running numpy_integrator.py (numpy) gives the following timing: 1.629 s.
+Running numba_integrator.py (numba) gives the following timing: 0.281 s.
+
+We see that the numba integrator is 100x faster than pure python, and about 5x faster than numpy.
+This is only true for large N however. When dropping N down to 150000, numpy will use 0.003 s, while numba
+will use 0.115 s (38x SLOWER). These results are due to the compilation of the code in numba takes a significant
+amount of time, while the execution in general is faster. This means that we won't see the power of numba until
+we up the integration points (like in the results above).
+
+It's extremely simple to speed up the code with numba, given that the function you're trying to speed up doesn't
+try to take a python function as an agrument (like in this exercise), or other similar problems. It can be done,
+as done in the code, but it takes some extra programming. If this isn't the case however, one can simply write
+@jit in front of what you want to be sped up. No need for numpy or any other modules, just pure python code,
+and BAM!.. faster code!
