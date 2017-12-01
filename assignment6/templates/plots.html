@@ -44,10 +44,33 @@ body{
 
 		<div id="locator1">
 		<form action="/plots/temp_plot" method='POST'>
-		Start Year:<br>
-		<input type="text" name="startyear"><br>
-		End year:<br>
-		<input type="text" name="endyear"><br>
+		<table>
+		<tr>
+		<td>Start Year:<br>
+		<input type="text" name="startyearTemp"><br>
+		Y-axis min:<br>
+		<input type="text" name="yminTemp" value="Default"></td>
+		<td>End year:<br>
+		<input type="text" name="endyearTemp"><br>
+		Y-axis max:<br>
+		<input type="text" name="ymaxTemp" value="Default"></td>
+		</tr>
+		</table>
+		Month:<br>
+		<select name="month">
+			<option value="January">January</option>
+			<option value="February">February</option>
+			<option value="March">March</option>
+			<option value="April">April</option>
+			<option value="May">May</option>
+			<option value="June">June</option>
+			<option value="July">July</option>
+			<option value="August">August</option>
+			<option value="September">September</option>
+			<option value="October">October</option>
+			<option value="November">November</option>
+			<option value="December">December</option>
+		</select><br>
 		<input type="submit" value="Submit">
 		</form>
 		</div>
@@ -57,11 +80,19 @@ body{
 	<br><br>
 
 		<div id="locator2">
-		<form>
-		Start Year:<br>
-		<input type="text" name="startyear"><br>
-		End year:<br>
-		<input type="text" name="endyear"><br>
+		<form action="/plots/CO2_plot" method='POST'>
+		<table>
+		<tr>
+		<td>Start Year:<br>
+		<input type="text" name="startyearCO2"><br>
+		Y-axis min:<br>
+		<input type="text" name="yminCO2" value="Default"></td>
+		<td>End year:<br>
+		<input type="text" name="endyearCO2"><br>
+		Y-axis max:<br>
+		<input type="text" name="ymaxCO2" value="Default"></td>
+		</tr>
+		</table>
 		<input type="submit" value="Submit">
 		</form>
 		</div>

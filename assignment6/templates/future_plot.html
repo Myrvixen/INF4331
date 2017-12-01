@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {
+
+	background-image: url("/static/explosion.jpg");
+	background-size: 1000px 1000px;
+	background-position: right;
+}
+
+.div1 {
+	float: left;
+}
+
+.div2 {
+	float: right;
+	text-align: right;
+}
+
+</style>
+<title> Plot</title>
+<body>
+<div>
+	<div class="div1">
+		<img src="data:image/png;base64,{{ future }}" width=130%>
+	</div>
+	<div class="div2">
+		<img src="/static/realistic.jpg" width=85%><br>
+		<img src="/static/blown.gif" width = 85%>
+	</div>
+</body>
+</html>

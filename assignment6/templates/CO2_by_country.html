@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+body{
+	background-image: url("/static/gogo.jpg"), url("/static/paper.jpg");
+	background-position: left top, right;
+	background-size: 750px 675px, 620px 1500px;
+	background-repeat: no-repeat, no-repeat;
+}
+
+.div1 {
+	float: left;
+}
+
+.div2 {
+	float: right;
+	text-align: center;
+}
+
+#locator1 {
+	position: absolute; visibility: visible; left: 175px; z-index: 200;
+}
+
+#locator2 {
+	position: absolute; visibility: visible; right: 100px; z-index: 200;
+}
+
+</style>
+
+<div class="div2">
+	<font size="7" color="red"><u><b>CO2-emmisions by country</b></u></font><br>
+	<h1><b>On this site you can generate bar-plots for <br>
+	CO2-emissions for every country within <br>
+	thresholds of your own choosing... how<br>
+	amazing! Go ahead and insert your desired <br>
+	minimum and maximum thresholds (in <br>MMT)
+	for emmisions, as well as for which <br>
+	year <font color="red"><u>
+	within the range of 1960-2013.</u></font> <br>
+	Naturally, the upper threshold input should <br>also be
+	<font color="red"><u> larger</u></font> than the lower threshold input</font>
+	</b></h1><br>
+	<div id="locator2">
+		<font size="5">
+		<form action="/CO2_by_country/bar_plot" method='POST'>
+		<table>
+		<tr>
+		<td>Lower thresh.:<br>
+		<input type="text" name="lowThresh"><br></td>
+		<td>Upper thresh.:<br>
+		<input type="text" name="uppThresh"><br></td>
+		<td>Year:<br>
+		<input type="text" name="yearCountry"><br></td>
+		</tr>
+		</table>
+		<input type="submit" value="Submit">
+		</form>
+		</font>
+	</div>
+</div>

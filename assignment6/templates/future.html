@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+body{
+	background-image: url("/static/mindblown.jpg"), url("/static/paper.jpg");
+	background-position: left top, right;
+	background-size: 750px 675px, 620px 1500px;
+	background-repeat: no-repeat, no-repeat;
+}
+
+.div1 {
+	float: left;
+}
+
+.div2 {
+	float: right;
+	text-align: center;
+}
+
+#locator1 {
+	position: absolute; visibility: visible; left: 175px; z-index: 200;
+}
+
+#locator2 {
+	position: absolute; visibility: visible; right: 100px; z-index: 200;
+}
+
+</style>
+
+<div class="div2">
+	<font size="7" color="red"><u><b>The Future</b></u></font><br>
+	<h1><b>Now, let's blow our minds with some<br>
+	incredibly (probably) accurate predictions <br>
+	on what the future temparature will look <br>
+	like based on our data of the temperature<br>and CO2-emmisions from <i>the past</i>.<br><br>
+	The latest datapoints are taken from 2012,<br>
+	so any year after this is considered a <br>
+	glorious futuristic world with flying <br>
+	cars and stable internet. Enter a month <br>
+	and the year you want to simulate to.
+	</b></h1><br>
+	<div id="locator2">
+		<font size="5">
+		<form action="/future/future_plot" method='POST'>
+		<table>
+		<tr>
+
+		<td>Month:<br>
+		<select name="futMonth">
+			<option value="January">January</option>
+			<option value="February">February</option>
+			<option value="March">March</option>
+			<option value="April">April</option>
+			<option value="May">May</option>
+			<option value="June">June</option>
+			<option value="July">July</option>
+			<option value="August">August</option>
+			<option value="September">September</option>
+			<option value="October">October</option>
+			<option value="November">November</option>
+			<option value="December">December</option>
+		</select><br></td>
+
+		<td>Year:<br>
+		<input type="text" name="futYear"><br></td>
+		</tr>
+		</table>
+		<input type="submit" value="Submit">
+		</form>
+		</font>
+	</div>
+</div>
